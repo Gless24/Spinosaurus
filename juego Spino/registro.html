@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Registro de Ganador</title>
+  <link rel="stylesheet" href="style.css"/>
+  <style>
+    .registro-container {
+      width: 100%;
+      max-width: 450px;
+      padding: 30px;
+      margin: 20px auto;
+      background: var(--panel);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .form-group label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--ink-dim);
+    }
+    .form-group input[type="text"],
+    .form-group input[type="email"],
+    .form-group input[type="tel"] {
+      width: 100%;
+      padding: 12px;
+      border: 2px solid var(--panel-border);
+      border-radius: 8px;
+      background: rgba(0,0,0,.3);
+      color: var(--ink);
+      font-size: 16px;
+      transition: border-color .3s;
+    }
+    .form-group input:focus {
+      border-color: var(--accent);
+      outline: none;
+    }
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 14px;
+      font-size: 18px;
+      font-weight: 700;
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      color: var(--bg-1);
+      text-shadow: 0 1px 1px rgba(0,0,0,.2);
+      transition: transform .1s;
+    }
+    .submit-btn:hover {
+      transform: translateY(-2px);
+    }
+  </style>
+</head>
+<body>
+  <h1>¡Felicidades, Ganador!</h1>
+  <p>¡Lograste un puntaje alto! Regístrate para reclamar tu boleto.</p>
+
+  <div class="registro-container">
+    <form id="registroForm">
+      <div class="form-group">
+        <label for="nombre">Nombre Completo</label>
+        <input type="text" id="nombre" name="nombre" required />
+      </div>
+      <div class="form-group">
+        <label for="correo">Correo Electrónico</label>
+        <input type="email" id="correo" name="correo" required />
+      </div>
+      <div class="form-group">
+        <label for="telefono">Número de Teléfono</label>
+        <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10,15}" title="Introduce un número de teléfono válido (solo dígitos)." />
+      </div>
+      <button type="submit" class="submit-btn">Obtener mi Boleto</button>
+    </form>
+    <div id="registro-mensaje" style="margin-top:20px; text-align:center; color:var(--accent);"></div>
+  </div>
+
+  <script>
+    document.getElementById('registroForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const nombre = document.getElementById('nombre').value;
+      const correo = document.getElementById('correo').value;
+      const telefono = document.getElementById('telefono').value;
+
+      if (!nombre || !correo || !telefono) {
+        alert("Por favor completa todos los campos.");
+        return;
+      }
+
+      const mensajeDiv = document.getElementById('registro-mensaje');
+      const premios = ['un boleto para el ZOO', 'un boleto para el Planetario', 'un boleto para el Museo'];
+      const premio = premios[Math.floor(Math.random() * premios.length)];
+
+      mensajeDiv.innerHTML = `¡Gracias, ${nombre}! Redirigiendo a tu boleto...`;
+
+      setTimeout(() => {
+        const params = new URLSearchParams({ nombre, correo, telefono, premio });
+        window.location.href = 'boleto.html?' + params.toString();
+      }, 1500);
+    });
+  </script>
+</body>
+</html>

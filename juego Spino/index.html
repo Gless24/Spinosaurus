@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spinosaurus Runner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- 🖼️ BARRA DE LOGOS -->
+    <div class="logo-bar">
+        <img src="LOGO-14.png" alt="Gobierno de Chiapas" class="logo-gob">
+        <img src="SATA_LOGO_Mesa de trabajo 1.png" alt="MUCH" class="logo-much">
+    </div>
+    
+    <div class="game-container">
+        <!-- Pantalla de Inicio -->
+        <div id="startScreen" class="overlay">
+            <h2>¡Bienvenido al Spinosaurus Runner!</h2>
+            <p>Juega, gana y llévate un regalo sorpresa.</p>
+            <button id="startButton">JUGAR</button>
+        </div>
+
+        <canvas id="gameCanvas" width="800" height="400"></canvas>
+        
+        <!-- Botón para móviles -->
+        <button id="btnJump" class="mobile-ctrl" aria-label="Saltar">Saltar</button>
+
+        <!-- Pantalla de Fin de Juego (Solo cuando pierdes) -->
+        <div id="endScreen" class="overlay" style="display: none;">
+            <h2 id="finalMessage">¡Juego terminado! 💀</h2>
+            <button id="restartButton" style="margin-top: 30px;">Reiniciar Juego</button>
+        </div>
+    </div>
+    
+    <!-- 🏆 MODAL DE PREMIO (LA NUEVA VENTANA SEPARADA) -->
+    <div id="prizeModal" class="overlay" style="display: none;">
+        <!-- Título del modal de premio -->
+        <h2 id="modalTitle"></h2> 
+        
+        <!-- Contenedor ÚNICO donde se inyectará el formulario y el boleto -->
+        <div id="ticketContainer">
+            <!-- Contenido del boleto y formulario se cargan aquí con JavaScript -->
+        </div>
+        <button id="closePrizeButton" style="margin-top: 30px;">Cerrar y Reiniciar</button>
+    </div>
+    <!-- FIN MODAL -->
+    
+    <div id="scoreDisplay">Puntaje: 0</div>
+    <div id="messageDisplay" style="display: none;"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
